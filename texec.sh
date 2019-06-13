@@ -6,7 +6,6 @@ tmux start-server
 pods_name=(`kubectl get pods -l=$1=$2 | grep api | awk '{print $1}'`)
 
 cmd="kubectl exec -it ${pods_name[0]} bash"
-echo $cmd
 tmux new-session -d -s "kube-texec_$1-$2" "$cmd"
 
 pods_name=("${pods_name[@]:1}")
