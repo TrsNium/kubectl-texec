@@ -3,7 +3,7 @@ label=$1
 attribute=$2
 
 tmux start-server
-pods_name=(`kubectl get pods -l=$1=$2 | grep api | awk '{print $1}'`)
+pods_name=(`kubectl get pods -l=$1=$2 | tail -n +2 | awk '{print $1}'`)
 
 cmd="kubectl exec -it ${pods_name[0]} bash"
 tmux new-session -d -s "kube-texec_$1-$2" "$cmd"
